@@ -296,6 +296,28 @@ def render_sidebar():
 # ---------------------------------------------------------------------------
 # Tabs
 # ---------------------------------------------------------------------------
+def render_entry_cards(container, entries, title_field, subtitle_field):
+    """Render roles or projects as expanders, in the same shape on every tab."""
+    position = 0
+    for entry in entries:
+        header = entry[title_field] + "  -  " + entry[subtitle_field] + "  (" + entry["period"] + ")"
+        box = container.expander(header, expanded=(position == 0))
+        box.caption(entry["summary"])
+        left, right = box.columns([1.15, 0.85])
+        left.markdown("**Key responsibilities**")
+        for bullet in entry["bullets"]:
+            left.write("- " + bullet)
+        right.markdown("**Impact & achievements**")
+        right.info(entry["impact"])
+        tags = []
+        for key in entry["skills"]:
+            skill = skill_by_key(key)
+            if skill is not None:
+                tags.append("`" + skill["name"] + "`")
+        right.caption("Skills evidenced: " + " ".join(tags))
+        position = position + 1
+
+
 def render_profile():
     st.subheader("About")
     st.write(resume_data.PROFILE["summary"])
@@ -334,27 +356,49 @@ def render_experience():
     for name in chosen:
         wanted.append(key_for_name(name))
 
-    shown = 0
+    kept = []
     for role in resume_data.EXPERIENCE:
         keep = True
         for key in wanted:
             if key not in role["skills"]:
                 keep = False
-        if not keep:
-            continue
-        shown = shown + 1
-        header = role["org"] + "  -  " + role["role"] + "  (" + role["period"] + ")"
-        box = st.expander(header, expanded=(shown == 1))
-        box.info(role["impact"])
-        for bullet in role["bullets"]:
-            box.write("- " + bullet)
-        tags = []
-        for key in role["skills"]:
-            tags.append("`" + skill_by_key(key)["name"] + "`")
-        box.caption("Skills evidenced: " + " ".join(tags))
+        if keep:
+            kept.append(role)
 
-    if shown == 0:
+    if len(kept) == 0:
         st.warning("No single role covers that whole combination. Try fewer filters.")
+    else:
+        render_entry_cards(st, kept, "role", "org")
+
+    st.divider()
+    st.subheader("Projects")
+    st.caption("Work I started myself, from the first line of the spec to acceptance testing.")
+    render_entry_cards(st, resume_data.PROJECTS, "org", "role")
+
+    st.divider()
+    st.subheader("Campus & research experience")
+    render_entry_cards(st, resume_data.CAMPUS, "org", "role")
+
+
+def render_publications():
+    st.subheader("Publications & working papers")
+    st.write(resume_data.RESEARCH_STATEMENT)
+    for paper in resume_data.PUBLICATIONS:
+        box = st.container(border=True)
+        # an inline badge rather than a full-width status box, which drowned
+        # out the citation it was meant to label
+        if paper["status"] in ("Published", "In press"):
+            colour = "green"
+        else:
+            colour = "blue"
+        box.markdown(
+            ":" + colour + "-background[**" + paper["status"] + "**]"
+            "  \u00b7  " + paper["role"]
+        )
+        box.markdown("**" + paper["citation"] + "**")
+        box.write(paper["detail"])
+        if paper["link"] != "":
+            box.markdown("[" + paper["link_label"] + "](" + paper["link"] + ")")
 
 
 def render_fit(selected_keys, importance):
@@ -483,42 +527,47 @@ def render_fit(selected_keys, importance):
 
 
 def render_download():
-    st.subheader("Take it with you")
+    st.subheader("Take a resume with you")
+    st.write(
+        "Three versions, tailored to three different kinds of role. Every one of "
+        "them is built from the same underlying record - only the emphasis changes."
+    )
+
+    columns = st.columns(len(resume_data.RESUME_DOWNLOADS))
+    position = 0
+    for item in resume_data.RESUME_DOWNLOADS:
+        column = columns[position]
+        box = column.container(border=True)
+        box.markdown("**" + item["title"] + "**")
+        box.caption(item["blurb"])
+        content = read_file_bytes(item["file"])
+        if content is None:
+            box.warning("Not generated yet.")
+        else:
+            box.download_button(
+                "Download PDF",
+                data=content,
+                file_name=item["download_name"],
+                mime="application/pdf",
+                key="download_" + item["key"],
+                width="stretch",
+            )
+        position = position + 1
+
+    st.divider()
     page = read_file_bytes("resume.html")
-    if page is None:
-        st.warning("resume.html has not been generated yet. Run: python build_static_html.py")
-    else:
+    if page is not None:
         st.download_button(
-            "Download the one-page resume (HTML, opens in any browser)",
+            "Or take this whole page as a single HTML file",
             data=page,
-            file_name="ZHAN_Wenqian_Resume.html",
+            file_name="Zhan_Wenqian_Resume.html",
             mime="text/html",
         )
         st.caption(
-            "The file is self-contained - the photo is embedded, there is no "
-            "JavaScript and nothing loads from the internet. Open it and press "
-            "Ctrl/Cmd + P for a print-ready PDF."
+            "Self-contained - the photo is embedded, there is no JavaScript and "
+            "nothing loads from the internet. Open it and press Ctrl/Cmd + P for a "
+            "print-ready PDF."
         )
-
-    st.divider()
-    st.subheader("How this stays easy to maintain")
-    st.write(
-        "Both the static page and this app read the same file. There is no second "
-        "copy of my resume to keep in sync."
-    )
-    st.code(
-        "resume_data.py          <- the only place the content lives\n"
-        "    |\n"
-        "    +-- build_static_html.py  --> resume.html\n"
-        "    |\n"
-        "    +-- resume_app.py         --> this Streamlit app",
-        language="text",
-    )
-    st.write(
-        "Adding next year's internship means appending one dictionary to "
-        "EXPERIENCE in resume_data.py. Both pages pick it up straight away - "
-        "the roles, the skill tags and the Role Fit scoring all update together."
-    )
 
 
 # ---------------------------------------------------------------------------
@@ -533,13 +582,15 @@ def main():
         resume_data.PROFILE["headline"] + "  \u00b7  " + resume_data.PROFILE["tagline"]
     )
 
-    profile_tab, experience_tab, fit_tab, download_tab = st.tabs(
-        ["Profile", "Experience", "Role fit", "Download"]
+    profile_tab, experience_tab, research_tab, fit_tab, download_tab = st.tabs(
+        ["Profile", "Experience & projects", "Research", "Role fit", "Download"]
     )
     with profile_tab:
         render_profile()
     with experience_tab:
         render_experience()
+    with research_tab:
+        render_publications()
     with fit_tab:
         render_fit(selected_keys, importance)
     with download_tab:

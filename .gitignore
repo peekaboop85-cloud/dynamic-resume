@@ -12,3 +12,6 @@ __pycache__/
 # coursework deliverables - kept local, not published
 Part1_Documentation.docx
 screenshots/
+
+# intermediate render files
+resumes/*.tmp.html

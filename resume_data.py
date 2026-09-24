@@ -60,6 +60,8 @@ HIGHLIGHTS = [
 EXPERIENCE = [
     {
         "id": "bytedance",
+        "summary": "Data quality and business reporting for the User Growth team, across user behaviour and transaction data.",
+        "icon": "chart",
         "org": "ByteDance",
         "role": "User Growth | Business Analysis Intern",
         "period": "Jan 2025 - Feb 2025",
@@ -73,6 +75,8 @@ EXPERIENCE = [
     },
     {
         "id": "loreal",
+        "summary": "Competitor benchmarking and CRM research for the beauty category team.",
+        "icon": "target",
         "org": "L'Oreal (China)",
         "role": "Business Analysis Intern",
         "period": "Apr 2024 - Jun 2024",
@@ -85,6 +89,8 @@ EXPERIENCE = [
     },
     {
         "id": "western",
+        "summary": "Sell-side equity research covering the electronics and semiconductor sector.",
+        "icon": "chip",
         "org": "Western Securities",
         "role": "Research Intern, Electronics & Semiconductors",
         "period": "Dec 2025 - Mar 2026",
@@ -98,6 +104,8 @@ EXPERIENCE = [
     },
     {
         "id": "roland_berger",
+        "summary": "Consulting project team, on a management diagnostic and a cross-industry M&A study.",
+        "icon": "briefcase",
         "org": "Roland Berger",
         "role": "Consulting Project Team, Intern",
         "period": "Nov 2025 - Feb 2026",
@@ -269,6 +277,55 @@ SKILLS = [
             {"org": "Roland Berger", "detail": "Contributed to a 15+ page market-entry deck."},
         ],
     },
+{
+        "key": "product",
+        "name": "Product Definition & 0-to-1 Delivery",
+        "group": "AI Applications",
+        "level": 4,
+        "evidence": [
+            {"org": "BaoBeiCang", "detail": "PRD covering 6 modules, 27 pages, P0-P3 priorities, a five-stage release plan and the pricing ladder; shipped and accepted on a real device."},
+            {"org": "Wengua", "detail": "Defined the product, the trust mechanisms and the compliance red lines before any feature was built."},
+        ],
+    },
+    {
+        "key": "rag",
+        "name": "RAG & LLM Application Engineering",
+        "group": "AI Applications",
+        "level": 4,
+        "evidence": [
+            {"org": "BaoBeiCang", "detail": "Six-stage OCR-to-LLM pipeline; only one stage left to the model, the rest rule-coded. 10 hard prompt constraints written against a real hallucination failure."},
+            {"org": "RAG Agents Project", "detail": "Two retrieval-augmented agents on Coze, tuned against a 1,000-comment hand-labelled evaluation set."},
+        ],
+    },
+    {
+        "key": "ml",
+        "name": "Machine Learning & SEM",
+        "group": "Analytics & Visualisation",
+        "level": 4,
+        "evidence": [
+            {"org": "Chia Tai Cup Project", "detail": "K-means segmentation plus a structural equation model of satisfaction, cross-validated against random forest and XGBoost feature importance."},
+        ],
+    },
+    {
+        "key": "econometrics",
+        "name": "Panel Econometrics & Causal Inference",
+        "group": "Research Methods",
+        "level": 4,
+        "evidence": [
+            {"org": "Published research", "detail": "28,473 firm-year panel with industry and year fixed effects; mediation via the KZ index; Altman Z-score and Merton distance-to-default as alternative measures."},
+            {"org": "Working paper", "detail": "Moderated-mediation design with entropy balancing, IPW, propensity-score matching and placebo tests."},
+        ],
+    },
+    {
+        "key": "qualitative",
+        "name": "Qualitative & Case Research",
+        "group": "Research Methods",
+        "level": 4,
+        "evidence": [
+            {"org": "Undergraduate dissertation", "detail": "Longitudinal single-case study of CIMC Group; Gioia method with 41 first-order concepts, 15 themes and 4 aggregate dimensions; CiteSpace across 539 publications."},
+            {"org": "CATL working paper", "detail": "Executive interviews triangulated against disclosures, patent portfolio and industry coverage."},
+        ],
+    },
 ]
 
 # Ready-made requirement profiles, so a recruiter can start from one click
@@ -336,4 +393,192 @@ SKILL_GROUPS = [
     "Analytics & Visualisation",
     "AI Applications",
     "Business & Commercial",
+    "Research Methods",
+]
+
+
+# ---------------------------------------------------------------------------
+# Projects I started myself, rather than work I was assigned.
+# Same shape as EXPERIENCE so both render through the same card.
+# ---------------------------------------------------------------------------
+PROJECTS = [
+    {
+        "id": "baobeicang",
+        "summary": "Photograph an insurance policy, get an AI check-up report in three minutes - score, radar chart and risk list - then hand off to a human expert.",
+        "icon": "shield",
+        "org": "BaoBeiCang - AI Insurance Policy Check-up",
+        "role": "Product Owner & Solo Developer (0 to 1)",
+        "period": "Apr 2026 - Jul 2026",
+        "impact": "Shipped and accepted on a real device: 73 commits, ~15,200 lines of product code and 5,600 lines of tests, with 119 backend and 80 frontend tests passing.",
+        "bullets": [
+            "Ran demand research across users, agents and engineering and concluded the market gap was neutral policy interpretation, not more selling. Wrote the PRD - 6 modules, 27 pages, P0-P3 priorities, a five-stage release plan - and the pricing ladder from a free check-up to a paid expert review, membership and an annual managed plan.",
+            "Designed a six-stage pipeline: batch upload, OCR, content validation, deterministic fact extraction, LLM scoring, then de-duplication. Anything that could be expressed as a rule was taken out of the model, leaving one stage to the LLM. Settings were split by job - temperature 0.2 with enforced JSON for scoring, 0.7 with a follow-up protocol for advisory chat, handing over to a human at the third turn.",
+            "Wrote 10 hard prompt constraints after a real failure in which the model asserted a user had no critical-illness cover when they had only uploaded a summary screenshot: coverage bands locked to an enumeration, no penalty for content that was never shown, and an explicit 'insufficient information' answer with product recommendations forbidden in that case. Set a 90% recognition-accuracy gate below which the product would not be promoted at all.",
+        ],
+        "skills": ["product", "rag", "ai_workflow", "python", "data_quality"],
+    },
+    {
+        "id": "wengua",
+        "summary": "BaZi charting, I Ching hexagram casting and practitioner sessions, in a category dominated by fortune-telling apps with poor reputations.",
+        "icon": "compass",
+        "org": "Wengua - Chinese Culture & Emotional Companion App",
+        "role": "Founder, product definition and prototype (0 to 1)",
+        "period": "Jul 2026 - Present",
+        "impact": "Core demo working end to end, with the hardest domain logic built first and the business model argued only after it ran.",
+        "bullets": [
+            "Set a dual value anchor - classical Chinese culture plus emotional support for women - and made every product decision answer to it: conversations follow empathise, then interpret, then advise; scenarios centre on relationships rather than fortune or wealth. The positioning also resolves the category's compliance problem, because cultural companionship makes no claims about anyone's fate.",
+            "Designed the trust mechanisms, because the thing that kills credibility in this category is a result that looks arbitrary. The daily draw is seeded from user ID plus date, so re-entering the same day cannot reroll it; hexagram casting uses cryptographically secure randomness, with the cast and its seed stored so any reading can be reproduced and audited afterwards.",
+            "Fixed the content red lines before the feature list: the product describes itself only as cultural and emotional companionship, never as regulated counselling, and no script may promise to change or avert anyone's fortune. These became the review standard for practitioner scripts.",
+        ],
+        "skills": ["product", "ai_workflow", "python"],
+    },
+    {
+        "id": "rag_agents",
+        "summary": "Two retrieval-augmented agents: one for automated analytical reporting, one for sentiment classification of customer feedback.",
+        "icon": "robot",
+        "org": "RAG-Enhanced Agents for Market Research",
+        "role": "Independent Developer",
+        "period": "Feb 2025 - Jun 2025",
+        "impact": "Two retrieval-augmented agents delivered end to end, measured against hand-labelled data rather than impressions.",
+        "bullets": [
+            "Built two Retrieval-Augmented Generation agents on the Coze platform - one for automated analytical reporting, one for semantic sentiment classification of customer feedback - with a domain knowledge base and vector store to beat a general-purpose LLM baseline on retrieval relevance.",
+            "Assembled a 1,000-comment manually annotated evaluation set and iterated the knowledge base and prompts against it until agreement with the human labels stabilised. Ran the whole cycle alone: workflow design, prompt engineering, testing and delivery.",
+        ],
+        "skills": ["rag", "ai_workflow", "python"],
+    },
+    {
+        "id": "chiatai",
+        "summary": "A national market research competition entry on how tourists adopt digital travel services.",
+        "icon": "chart",
+        "org": "Tourist Segmentation - 15th 'Chia Tai Cup' National Competition",
+        "role": "Group Leader",
+        "period": "Jan 2025 - Apr 2025",
+        "impact": "First Prize, Shandong Provincial Division.",
+        "bullets": [
+            "Designed the survey instrument and led the quantitative workflow: collected and cleaned 550 valid responses on tourists' adoption of digital services in Python, segmented respondents with K-means, and specified a structural equation model of satisfaction in which digital service quality, transport accessibility and interactive engagement carried the strongest path effects.",
+            "Cross-checked the SEM path structure against random forest and XGBoost feature importance, and corroborated the findings with automated text clustering and a RoBERTa sentiment classifier run over open-ended responses and web reviews.",
+        ],
+        "skills": ["ml", "stats", "survey", "python", "dataviz"],
+    },
+]
+
+# ---------------------------------------------------------------------------
+# University research and programmes.
+# ---------------------------------------------------------------------------
+CAMPUS = [
+    {
+        "id": "iigf",
+        "summary": "Research assistant at a green finance institute, building the policy and standards base its research ran on.",
+        "icon": "leaf",
+        "org": "International Institute of Green Finance, CUFE",
+        "role": "Research Assistant",
+        "period": "Feb 2024 - May 2025",
+        "impact": "Built the reference base the institute's downstream green-finance research ran on.",
+        "bullets": [
+            "Built and maintained a structured repository of international agreements, national policies and disclosure standards in green finance, including the Paris Agreement and the G20 sustainable finance agendas.",
+            "Co-drafted research reports and policy briefs, authoring literature review and policy comparison sections and running preliminary descriptive analysis.",
+            "Delivered outputs in both Chinese and English, keeping terminology consistent across the institute's bilingual publications.",
+        ],
+        "skills": ["industry_research", "business_writing", "database"],
+    },
+    {
+        "id": "innovation_program",
+        "summary": "A nationally funded undergraduate research project on how state-owned enterprises realign ESG strategy under digital transformation.",
+        "icon": "flag",
+        "org": "National Innovation & Entrepreneurship Training Programme",
+        "role": "Team Leader - SOE ESG Strategy in the Digital Era",
+        "period": "May 2023 - May 2024",
+        "impact": "Nationally funded undergraduate research project, led from proposal to final framework.",
+        "bullets": [
+            "Led a nationally funded project on how Chinese state-owned enterprises realign ESG strategy as digital transformation and regulatory stringency advance together.",
+            "Content-coded 50 national policy directives issued from 2000 onwards into a longitudinal regulatory timeline, identifying five institutional turning points that redefined state expectations of disclosure and governance.",
+            "Synthesised qualitative and archival evidence into a stage-based framework showing how SOEs reconcile compliance mandates with technological innovation.",
+        ],
+        "skills": ["qualitative", "industry_research", "business_writing"],
+    },
+]
+
+# ---------------------------------------------------------------------------
+# Publications and working papers.
+#   status drives the badge colour on both pages
+# ---------------------------------------------------------------------------
+PUBLICATIONS = [
+    {
+        "status": "Published",
+        "citation": "Zhan, W., & Jiang, L. (2024). The impact of ESG information disclosure on corporate financial risk - evidence from Chinese enterprises. Highlights in Business, Economics and Management, 44, 299-310.",
+        "role": "First and corresponding author",
+        "link": "https://doi.org/10.54097/r0p5dx61",
+        "link_label": "doi.org/10.54097/r0p5dx61",
+        "detail": "Ran the full empirical pipeline alone on 28,473 A-share firm-year observations from 2012 to 2022. ESG disclosure is associated with significantly lower financial risk (b = -0.035, p < 0.01); financing constraints measured by the KZ index carry the effect; and the association is stronger among more digitalised firms (interaction b = -0.008, p < 0.01). Default risk was measured with Altman Z-scores and checked against a Merton distance-to-default model.",
+    },
+    {
+        "status": "In press",
+        "citation": "Jiang, L., & Zhan, W. (in press). Impact of ESG ratings on corporate innovation efficiency: evidence from Chinese listed companies. Highlights in Business, Economics and Management.",
+        "role": "Co-author",
+        "link": "",
+        "link_label": "",
+        "detail": "Co-designed the conceptual model and identification strategy; led the literature synthesis, panel cleaning and variable construction across CSMAR and patent databases; ran the baseline regressions and robustness checks.",
+    },
+    {
+        "status": "In progress",
+        "citation": "Zhan, W. How does executive attention to artificial intelligence translate into firm value? The roles of firm resilience and board network centrality.",
+        "role": "Sole author",
+        "link": "",
+        "link_label": "",
+        "detail": "Sequential mixed-methods study of Chinese A-share firms. Executive AI attention is measured from annual-report MD&A text with a purpose-built keyword dictionary; resilience combines return volatility and three-year sales growth; firm value is Tobin's Q. Controlling for AI patent stock separates managerial attention from existing capability - symbolic disclosure from substantive building. A moderated-mediation design reports conditional indirect effects, with entropy balancing, IPW, propensity-score matching and placebo tests as selection checks.",
+    },
+    {
+        "status": "Under revision",
+        "citation": "Zhan, W. Research on the multi-actor collaborative governance mechanism of AI-driven management.",
+        "role": "Sole author - Outstanding Undergraduate Dissertation",
+        "link": "",
+        "link_label": "",
+        "detail": "Treats AI systems as socio-technical governance regimes that reallocate decision rights and accountability. CiteSpace bibliometric analysis across 539 CNKI and Web of Science publications, then a longitudinal single-case study of CIMC Group across three stages - exploration, platformisation and deep AI embedding - triangulating executive interviews, site notes, archival reports and 80+ regulatory documents. The Gioia method produced 41 first-order concepts, 15 second-order themes and 4 aggregate dimensions.",
+    },
+    {
+        "status": "Working paper",
+        "citation": "Zhan, W. The catch-up mechanism of Chinese latecomer enterprises under digitalisation: the case of CATL.",
+        "role": "Principal investigator",
+        "link": "",
+        "link_label": "",
+        "detail": "Semi-structured interviews with two senior executives of CATL subsidiaries, triangulated against annual disclosures, the patent portfolio and industry coverage. Thematic coding across interview and operational data delineates five mechanisms linking digital transformation to catch-up advantage.",
+    },
+]
+
+RESEARCH_STATEMENT = (
+    "I study how managerial attention and governance structures decide whether firms turn "
+    "emerging technology - particularly AI - into real organisational capability rather than "
+    "an announcement. The work combines panel econometrics and text-based measurement with "
+    "inductive case research."
+)
+
+
+# ---------------------------------------------------------------------------
+# The three tailored resumes offered on the Download tab.
+# Built by build_resume_pdfs.py from the markdown in resume_sources/, with the
+# phone number and the old mailbox stripped out - neither belongs on a page
+# anyone on the internet can open.
+# ---------------------------------------------------------------------------
+RESUME_DOWNLOADS = [
+    {
+        "key": "business_analytics",
+        "title": "Business Analytics",
+        "blurb": "Data quality, dashboards and conversion analysis. The version behind this site.",
+        "file": "resumes/business_analytics.pdf",
+        "download_name": "Zhan_Wenqian_Business_Analytics.pdf",
+    },
+    {
+        "key": "consulting",
+        "title": "Consulting & Equity Research",
+        "blurb": "Industry mapping, company fundamentals and the write-up that reaches the client.",
+        "file": "resumes/consulting_equity_research.pdf",
+        "download_name": "Zhan_Wenqian_Consulting_Equity_Research.pdf",
+    },
+    {
+        "key": "strategy",
+        "title": "Strategy & Management Trainee",
+        "blurb": "Competitor benchmarking, management diagnostics and cross-functional projects.",
+        "file": "resumes/strategy_management_trainee.pdf",
+        "download_name": "Zhan_Wenqian_Strategy_Management_Trainee.pdf",
+    },
 ]

@@ -1,0 +1,14 @@
+# virtual environment - never commit this
+.venv/
+venv/
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
+# macOS
+.DS_Store
+
+# coursework deliverables - kept local, not published
+Part1_Documentation.docx
+screenshots/

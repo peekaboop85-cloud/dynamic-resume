@@ -9,13 +9,11 @@
 :root {
   --bg: #ffffff;
   --card: #ffffff;
-  --surface: #f7f9fc;
   --line: #e4e9f2;
   --ink: #101826;
   --navy: #0f2350;
-  --muted: #5d6b82;
+  --muted: #55627a;
   --accent: #2b4ecc;
-  --accent-soft: #eef2ff;
   --pill: #e9eef9;
   --shadow: 0 1px 2px rgba(16, 24, 38, .04), 0 10px 30px rgba(16, 24, 38, .06);
 }
@@ -24,13 +22,11 @@
   :root {
     --bg: #0b111c;
     --card: #141d2e;
-    --surface: #131b2a;
     --line: #26314a;
     --ink: #e9eef7;
     --navy: #dbe5f8;
-    --muted: #97a4ba;
+    --muted: #9aa7bd;
     --accent: #7ea2ff;
-    --accent-soft: #1a2440;
     --pill: #1e293f;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
   }
@@ -38,10 +34,9 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
-
-/* A plain white page looked empty, so the background carries a soft wash of
-   colour and the cards sit on top of it in flat white. */
+/* The page is a document, not an application: nothing here moves, folds or
+   responds to a click. The only interactive elements are the two contact
+   links, because a reader needs a way to reply. */
 body {
   margin: 0;
   min-height: 100vh;
@@ -73,10 +68,9 @@ body {
 .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
 
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
 
 /* ---------- header ---------- */
-.hero { display: flex; gap: 28px; align-items: center; padding: 56px 0 36px; }
+.hero { display: flex; gap: 28px; align-items: center; padding: 56px 0 30px; }
 
 .avatar {
   width: 124px; height: 124px; border-radius: 50%; object-fit: cover;
@@ -91,41 +85,20 @@ a:hover { text-decoration: underline; }
 .contact { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; font-size: .9rem; }
 
 .contact li {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 13px;
-  color: var(--muted);
-  overflow-wrap: anywhere;
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+  padding: 4px 13px; color: var(--muted); overflow-wrap: anywhere;
 }
-
-/* ---------- nav ---------- */
-.nav {
-  position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 10px 0; font-size: .88rem; }
-.nav a { display: block; padding: 5px 12px; border-radius: 7px; color: var(--muted); }
-.nav a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
 
 /* ---------- sections ---------- */
-section { padding: 42px 0 8px; scroll-margin-top: 62px; }
+section { padding: 34px 0 6px; }
 
 h2 {
   font-size: .78rem; text-transform: uppercase; letter-spacing: .13em;
-  color: var(--muted); margin: 0 0 20px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-  transition: color .3s ease, border-color .3s ease;
-  break-after: avoid;
+  color: var(--muted); margin: 0 0 18px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--line); break-after: avoid;
 }
 
-section:target h2 { color: var(--accent); border-color: var(--accent); }
-
-.section-note { margin: -8px 0 20px; color: var(--muted); font-size: .92rem; }
+.section-note { margin: -6px 0 18px; color: var(--muted); font-size: .92rem; }
 .summary { margin: 0; font-size: 1.04rem; color: var(--ink); max-width: 68ch; }
 
 /* ---------- metrics ---------- */
@@ -138,17 +111,15 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 
 /* ---------- the role / project card ---------- */
 .card {
+  display: block;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow);
-  margin-bottom: 18px;
-  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 24px 26px;
+  break-inside: avoid;
 }
-
-.card > summary { list-style: none; cursor: pointer; padding: 26px 28px; }
-.card > summary::-webkit-details-marker { display: none; }
-.card > summary:hover { background: color-mix(in srgb, var(--accent-soft) 55%, transparent); }
 
 .card-top { display: flex; gap: 18px; align-items: flex-start; }
 
@@ -164,7 +135,7 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .card-icon svg { width: 24px; height: 24px; stroke: var(--card); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
 .card-titles { flex: 1; min-width: 0; }
-.card-role { margin: 0; font-size: 1.42rem; font-weight: 800; letter-spacing: -.02em; color: var(--navy); line-height: 1.2; }
+.card-role { margin: 0; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; color: var(--navy); line-height: 1.2; }
 .card-org { margin: 3px 0 0; font-size: 1.04rem; font-weight: 700; color: var(--navy); }
 
 .card-period {
@@ -173,12 +144,9 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
   font-size: .8rem; font-weight: 700; white-space: nowrap; flex-shrink: 0;
 }
 
-.card-summary { margin: 18px 0 0; color: var(--muted); font-size: .98rem; }
+.card-summary { margin: 16px 0 0; color: var(--muted); font-size: .98rem; }
 
-/* the expandable half */
-.card-body { padding: 0 28px 26px; }
-
-.card-cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+.card-cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
 
 .col-title { display: flex; align-items: center; gap: 9px; font-size: 1.02rem; font-weight: 700; color: var(--ink); margin: 0 0 14px; }
 .col-title svg { width: 19px; height: 19px; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
@@ -189,24 +157,17 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .card-cols li { margin-bottom: 11px; font-size: .95rem; color: var(--muted); }
 .card-impact { margin: 0; font-size: .97rem; color: var(--muted); }
 
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
-.tag { font-size: .76rem; background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 3px 9px; }
-
-.card-hint { display: block; margin-top: 16px; font-size: .82rem; color: var(--accent); font-weight: 600; }
-.card[open] .card-hint { display: none; }
-
 /* ---------- publications ---------- */
 .pub {
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow);
+  padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow); break-inside: avoid;
 }
 
 .pub-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
 
 .badge {
   font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-  border-radius: 999px; padding: 3px 11px;
-  background: var(--pill); color: var(--navy);
+  border-radius: 999px; padding: 3px 11px; background: var(--pill); color: var(--navy);
 }
 
 .badge.live { background: #dff3e6; color: #17603a; }
@@ -218,57 +179,6 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .pub-detail { margin: 0; font-size: .91rem; color: var(--muted); }
 .pub-link { display: inline-block; margin-top: 8px; font-size: .85rem; }
 
-/* ---------- skills ---------- */
-.skill-group { margin-bottom: 26px; }
-.skill-group h3 { font-size: .9rem; margin: 0 0 12px; color: var(--ink); }
-.skill { display: grid; grid-template-columns: 1fr 160px 34px; align-items: center; gap: 14px; padding: 7px 0; font-size: .93rem; }
-.track { height: 7px; background: var(--line); border-radius: 99px; overflow: hidden; }
-
-.fill {
-  display: block;
-  height: 100%;
-  background: var(--accent);
-  border-radius: 99px;
-  animation: grow .9s ease-out both;
-}
-
-@keyframes grow { from { width: 0; } }
-
-/* ---------- entrance motion (CSS only - there is no JavaScript here) ------- */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes pop {
-  from { opacity: 0; transform: scale(.88); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes sweep {
-  from { opacity: 0; transform: scaleX(0); }
-  to   { opacity: 1; transform: none; }
-}
-
-.avatar { animation: pop .7s cubic-bezier(.2,.8,.3,1) both; }
-.hero h1 { animation: rise .6s cubic-bezier(.2,.7,.3,1) .08s both; }
-.headline { animation: rise .6s cubic-bezier(.2,.7,.3,1) .16s both; }
-.tagline { animation: rise .6s cubic-bezier(.2,.7,.3,1) .22s both; }
-.contact li { animation: rise .5s cubic-bezier(.2,.7,.3,1) both; }
-.nav { animation: rise .5s ease-out .45s both; }
-.summary { animation: rise .6s ease-out .5s both; }
-.metric { animation: rise .55s cubic-bezier(.2,.7,.3,1) both; }
-.card { animation: rise .55s cubic-bezier(.2,.7,.3,1) both; }
-h2 { transform-origin: left; animation: sweep .5s ease-out both; }
-
-/* Anyone who has asked their system to reduce motion gets none of it. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
-
-.level { color: var(--muted); font-size: .8rem; text-align: right; }
-.languages { color: var(--muted); font-size: .88rem; margin: 4px 0 0; }
-
 /* ---------- education / awards ---------- */
 .edu { margin-bottom: 20px; }
 .edu-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
@@ -278,11 +188,13 @@ h2 { transform-origin: left; animation: sweep .5s ease-out both; }
 .edu ul, .awards { margin: 8px 0 0; padding-left: 20px; }
 .edu li, .awards li { font-size: .93rem; margin-bottom: 6px; color: var(--muted); }
 
-footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.languages { color: var(--muted); font-size: .93rem; margin: 14px 0 0; }
+
+footer { margin-top: 44px; padding: 22px 0 46px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
 
 /* ---------- small screens ---------- */
 @media (max-width: 860px) {
-  .card-cols { grid-template-columns: 1fr; gap: 24px; }
+  .card-cols { grid-template-columns: 1fr; gap: 22px; }
 }
 
 @media (max-width: 720px) {
@@ -291,62 +203,44 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
   .avatar { width: 104px; height: 104px; }
   .hero h1 { font-size: 1.75rem; }
   .edu-period { margin-left: 0; width: 100%; }
-  .skill { grid-template-columns: 1fr 88px 32px; gap: 10px; }
-  .card > summary { padding: 20px; }
-  .card-body { padding: 0 20px 20px; }
+  .card { padding: 20px; }
   .card-top { flex-wrap: wrap; }
   .card-period { margin-left: 70px; }
-  .card-role { font-size: 1.24rem; }
+  .card-role { font-size: 1.22rem; }
 }
 
-/* ---------- print: one keystroke turns this page into a PDF ---------- */
+/* ---------- print ---------- */
 @media print {
   :root {
-    --bg: #ffffff; --card: #ffffff; --surface: #ffffff; --line: #cfd6e2;
-    --ink: #000000; --navy: #14307a; --muted: #444444; --accent: #14307a;
-    --accent-soft: #ffffff; --pill: #eef1f7; --shadow: none;
+    --bg: #ffffff; --card: #ffffff; --line: #cfd6e2;
+    --ink: #000000; --navy: #14307a; --muted: #3f4a5c; --accent: #14307a;
+    --pill: #eef1f7; --shadow: none;
   }
 
   @page { margin: 13mm; }
 
   body { font-size: 9.2pt; line-height: 1.32; background: #fff !important; background-image: none !important; }
-  .nav { display: none; }
   .wrap { max-width: none; padding: 0; }
-  .hero { padding: 0 0 14px; gap: 18px; }
-  .avatar { width: 88px; height: 88px; box-shadow: none; border: 1px solid var(--line); }
+  .hero { padding: 0 0 12px; gap: 18px; }
+  .avatar { width: 84px; height: 84px; box-shadow: none; border: 1px solid var(--line); }
   section { padding: 10px 0 0; }
   h2 { margin-bottom: 8px; padding-bottom: 4px; }
   .section-note { margin: -4px 0 10px; }
   .summary { max-width: none; }
-  .metric { padding: 10px 13px; box-shadow: none; break-inside: avoid; }
+  .metrics { gap: 9px; }
+  .metric { padding: 10px 13px; box-shadow: none; }
   .metric b { font-size: 1.4rem; }
-  .card, .pub { box-shadow: none; break-inside: avoid; margin-bottom: 9px; }
-  .card > summary { padding: 11px 13px 8px; }
-  .card-body { padding: 0 13px 11px; }
-  .card-cols { padding-top: 9px; gap: 18px; }
-  .card-cols li { margin-bottom: 3px; }
+  .card, .pub { box-shadow: none; margin-bottom: 9px; }
+  .card { padding: 12px 14px; }
   .card-summary { margin-top: 10px; }
+  .card-cols { margin-top: 10px; padding-top: 9px; gap: 18px; }
+  .card-cols li { margin-bottom: 3px; }
   .card-role { font-size: 1.05rem; }
   .col-title { margin-bottom: 8px; font-size: .95rem; }
-  .tags { margin-top: 10px; }
   .card-icon { width: 32px; height: 32px; background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .pub { padding: 12px 14px; }
   .pub-head { margin-bottom: 5px; }
-  .metrics { gap: 9px; }
   .edu { margin-bottom: 12px; }
-  .card-hint { display: none; }
-  .skill { padding: 3px 0; }
-
-  /* two columns of skills instead of one long list */
-  .skill-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin-bottom: 14px; }
-  .skill-group h3 { grid-column: 1 / -1; }
-
-  /* every collapsed card is forced open so nothing is lost on paper */
-  .card[open] .card-body, .card .card-body { display: block !important; }
-  details::details-content { content-visibility: visible !important; block-size: auto !important; }
-
-  .fill, .avatar, .hero h1, .headline, .tagline, .contact li,
-  .summary, .metric, .card, h2 { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 </style>
 </head>
@@ -359,62 +253,50 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <p class="headline">MSc Business Analytics, Nanyang Technological University</p>
 <p class="tagline">Turning messy operational data into decisions</p>
 <ul class="contact">
-<li style="animation-delay:0.28s">Singapore</li>
-<li style="animation-delay:0.35s"><a href="mailto:ZHAN0820@e.ntu.edu.sg">ZHAN0820@e.ntu.edu.sg</a></li>
-<li style="animation-delay:0.42s"><a href="https://www.linkedin.com/in/wenqian-zhan-36076641b">linkedin.com/in/wenqian-zhan-36076641b</a></li>
+<li>Singapore</li>
+<li><a href="mailto:ZHAN0820@e.ntu.edu.sg">ZHAN0820@e.ntu.edu.sg</a></li>
+<li><a href="https://www.linkedin.com/in/wenqian-zhan-36076641b">linkedin.com/in/wenqian-zhan-36076641b</a></li>
 </ul>
 </div>
 </header>
 </div>
-<nav class="nav"><div class="wrap"><ul>
-<li><a href="#about">About</a></li>
-<li><a href="#impact">Impact</a></li>
-<li><a href="#experience">Experience</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#publications">Publications</a></li>
-<li><a href="#campus">Campus</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#education">Education</a></li>
-<li><a href="#awards">Awards</a></li>
-</ul></div></nav>
 <main class="wrap">
 <section id="about"><h2>About</h2><p class="summary">I am an MSc Business Analytics student at NTU with four analytics internships behind me at ByteDance, L'Oreal, Roland Berger and Western Securities. What connects them is the same habit: I do not trust a number until I have checked where it came from. At ByteDance that meant rebuilding the quality checks on six core tables before anyone reported on them; at Roland Berger it meant turning 200+ open-ended survey answers into five findings a partner could act on. I am looking for an e-commerce analyst role where the data is messy, the questions are commercial, and someone has to own both ends.</p></section>
 <section id="impact"><h2>Impact in Numbers</h2><div class="metrics">
-<div class="metric" style="animation-delay:0.0s">
+<div class="metric">
 <b>99.2%</b>
 <span>Data usability</span>
 <small>lifted from 92.5% across 6 core tables</small>
 </div>
-<div class="metric" style="animation-delay:0.06s">
+<div class="metric">
 <b>12</b>
 <span>Power BI dashboards</span>
 <small>built for daily GMV / product / user monitoring</small>
 </div>
-<div class="metric" style="animation-delay:0.12s">
+<div class="metric">
 <b>+63%</b>
 <span>Conversion peak found</span>
 <small>20:00 slot vs. daily average, ByteDance</small>
 </div>
-<div class="metric" style="animation-delay:0.18s">
+<div class="metric">
 <b>500+</b>
 <span>Data points maintained</span>
 <small>electronics industry database, Western Securities</small>
 </div>
-<div class="metric" style="animation-delay:0.24s">
+<div class="metric">
 <b>200+</b>
 <span>Survey responses analysed</span>
 <small>management diagnostic, Roland Berger</small>
 </div>
-<div class="metric" style="animation-delay:0.3s">
+<div class="metric">
 <b>30+</b>
 <span>Expert interviews structured</span>
 <small>unstructured notes to research conclusions</small>
 </div>
 </div></section>
 <section id="experience"><h2>Experience</h2>
-<p class="section-note">Four analytics internships. Each card opens for the full detail.</p>
-<details class="card" style="animation-delay:0.0s" open>
-<summary>
+<p class="section-note">Four analytics internships.</p>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg></span>
 <div class="card-titles">
@@ -424,9 +306,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Jan 2025 - Feb 2025</span>
 </div>
 <p class="card-summary">Data quality and business reporting for the User Growth team, across user behaviour and transaction data.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -437,17 +317,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Raised data usability from 92.5% to 99.2% and found the 20:00 conversion peak that reshaped campaign scheduling.</p>
-<div class="tags">
-<span class="tag">Data Quality &amp; QA Monitoring</span>
-<span class="tag">Power BI</span>
-<span class="tag">Python for Data Analysis</span>
-<span class="tag">User Behaviour &amp; Conversion Analysis</span>
-<span class="tag">Dashboard Design &amp; Data Visualisation</span>
-<span class="tag">AI / LLM Agent Workflows</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.05s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg></span>
 <div class="card-titles">
@@ -457,9 +329,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Apr 2024 - Jun 2024</span>
 </div>
 <p class="card-summary">Competitor benchmarking and CRM research for the beauty category team.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -469,16 +339,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Competitor benchmarking that fed 3 market opportunities into the Q3 category plan and informed 3 major promotional campaigns.</p>
-<div class="tags">
-<span class="tag">Competitor Benchmarking</span>
-<span class="tag">Excel (Pivot Tables, Modelling)</span>
-<span class="tag">E-Commerce &amp; Promotions Analytics</span>
-<span class="tag">Business Writing &amp; Stakeholder Reporting</span>
-<span class="tag">Statistics &amp; Cross-Tabulation</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.1s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.6"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3"/></svg></span>
 <div class="card-titles">
@@ -488,9 +351,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Dec 2025 - Mar 2026</span>
 </div>
 <p class="card-summary">Sell-side equity research covering the electronics and semiconductor sector.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -501,16 +362,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Maintained a 500+ data point industry database and structured 30+ expert interviews into research conclusions at scale.</p>
-<div class="tags">
-<span class="tag">AI / LLM Agent Workflows</span>
-<span class="tag">Database Building &amp; Maintenance</span>
-<span class="tag">Industry &amp; Equity Research</span>
-<span class="tag">Business Writing &amp; Stakeholder Reporting</span>
-<span class="tag">Data Quality &amp; QA Monitoring</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.15s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></span>
 <div class="card-titles">
@@ -520,9 +374,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Nov 2025 - Feb 2026</span>
 </div>
 <p class="card-summary">Consulting project team, on a management diagnostic and a cross-industry M&amp;A study.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -532,19 +384,12 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Turned 200+ survey responses into 5 core findings and screened 10+ robotics companies for a cross-industry M&amp;A deck.</p>
-<div class="tags">
-<span class="tag">Survey Design &amp; Scale Analysis</span>
-<span class="tag">Statistics &amp; Cross-Tabulation</span>
-<span class="tag">AI / LLM Agent Workflows</span>
-<span class="tag">Industry &amp; Equity Research</span>
-<span class="tag">Business Writing &amp; Stakeholder Reporting</span>
-</div></div>
-</div></div></details>
+</div>
+</div></article>
 </section>
 <section id="projects"><h2>Projects</h2>
 <p class="section-note">Work I started myself, from the first line of the spec to acceptance testing.</p>
-<details class="card" style="animation-delay:0.0s" open>
-<summary>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V6z"/><path d="M9.2 12.2l2 2 3.6-4"/></svg></span>
 <div class="card-titles">
@@ -554,9 +399,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Apr 2026 - Jul 2026</span>
 </div>
 <p class="card-summary">Photograph an insurance policy, get an AI check-up report in three minutes - score, radar chart and risk list - then hand off to a human expert.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -567,16 +410,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Shipped and accepted on a real device: 73 commits, ~15,200 lines of product code and 5,600 lines of tests, with 119 backend and 80 frontend tests passing.</p>
-<div class="tags">
-<span class="tag">Product Definition &amp; 0-to-1 Delivery</span>
-<span class="tag">RAG &amp; LLM Application Engineering</span>
-<span class="tag">AI / LLM Agent Workflows</span>
-<span class="tag">Python for Data Analysis</span>
-<span class="tag">Data Quality &amp; QA Monitoring</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.05s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
 <div class="card-titles">
@@ -586,9 +422,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Jul 2026 - Present</span>
 </div>
 <p class="card-summary">BaZi charting, I Ching hexagram casting and practitioner sessions, in a category dominated by fortune-telling apps with poor reputations.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -599,14 +433,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Core demo working end to end, with the hardest domain logic built first and the business model argued only after it ran.</p>
-<div class="tags">
-<span class="tag">Product Definition &amp; 0-to-1 Delivery</span>
-<span class="tag">AI / LLM Agent Workflows</span>
-<span class="tag">Python for Data Analysis</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.1s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M12 4v4M8.5 13h.01M15.5 13h.01M9 19v2M15 19v2"/></svg></span>
 <div class="card-titles">
@@ -616,9 +445,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Feb 2025 - Jun 2025</span>
 </div>
 <p class="card-summary">Two retrieval-augmented agents: one for automated analytical reporting, one for sentiment classification of customer feedback.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -628,14 +455,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Two retrieval-augmented agents delivered end to end, measured against hand-labelled data rather than impressions.</p>
-<div class="tags">
-<span class="tag">RAG &amp; LLM Application Engineering</span>
-<span class="tag">AI / LLM Agent Workflows</span>
-<span class="tag">Python for Data Analysis</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.15s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg></span>
 <div class="card-titles">
@@ -645,9 +467,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Jan 2025 - Apr 2025</span>
 </div>
 <p class="card-summary">A national market research competition entry on how tourists adopt digital travel services.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -657,14 +477,8 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">First Prize, Shandong Provincial Division.</p>
-<div class="tags">
-<span class="tag">Machine Learning &amp; SEM</span>
-<span class="tag">Statistics &amp; Cross-Tabulation</span>
-<span class="tag">Survey Design &amp; Scale Analysis</span>
-<span class="tag">Python for Data Analysis</span>
-<span class="tag">Dashboard Design &amp; Data Visualisation</span>
-</div></div>
-</div></div></details>
+</div>
+</div></article>
 </section>
 <section id="publications"><h2>Publications &amp; Working Papers</h2>
 <p class="section-note">I study how managerial attention and governance structures decide whether firms turn emerging technology - particularly AI - into real organisational capability rather than an announcement. The work combines panel econometrics and text-based measurement with inductive case research.</p>
@@ -711,8 +525,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 </article>
 </section>
 <section id="campus"><h2>Campus &amp; Research Experience</h2>
-<details class="card" style="animation-delay:0.0s" open>
-<summary>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4c0 9-5.5 14-13 14"/><path d="M4 20c0-8 5-13 13-13"/></svg></span>
 <div class="card-titles">
@@ -722,9 +535,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">Feb 2024 - May 2025</span>
 </div>
 <p class="card-summary">Research assistant at a green finance institute, building the policy and standards base its research ran on.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -735,14 +546,9 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Built the reference base the institute's downstream green-finance research ran on.</p>
-<div class="tags">
-<span class="tag">Industry &amp; Equity Research</span>
-<span class="tag">Business Writing &amp; Stakeholder Reporting</span>
-<span class="tag">Database Building &amp; Maintenance</span>
-</div></div>
-</div></div></details>
-<details class="card" style="animation-delay:0.05s">
-<summary>
+</div>
+</div></article>
+<article class="card">
 <div class="card-top">
 <span class="card-icon"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 5h11l-2 3 2 3H5z"/></svg></span>
 <div class="card-titles">
@@ -752,9 +558,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <span class="card-period">May 2023 - May 2024</span>
 </div>
 <p class="card-summary">A nationally funded undergraduate research project on how state-owned enterprises realign ESG strategy under digital transformation.</p>
-<span class="card-hint">Open for the detail &darr;</span>
-</summary>
-<div class="card-body"><div class="card-cols">
+<div class="card-cols">
 <div>
 <p class="col-title resp"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><path d="M17 11.5a2.8 2.8 0 1 0-1.6-5.1M18 20c0-2.2-.8-3.9-2.2-4.9"/></svg>Key Responsibilities</p>
 <ul>
@@ -765,130 +569,8 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <div>
 <p class="col-title impact"><svg class="" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Impact &amp; Achievements</p>
 <p class="card-impact">Nationally funded undergraduate research project, led from proposal to final framework.</p>
-<div class="tags">
-<span class="tag">Qualitative &amp; Case Research</span>
-<span class="tag">Industry &amp; Equity Research</span>
-<span class="tag">Business Writing &amp; Stakeholder Reporting</span>
-</div></div>
-</div></div></details>
-</section>
-<section id="skills"><h2>Skills</h2>
-<div class="skill-group"><h3>Data Engineering &amp; Preparation</h3>
-<div class="skill">
-<span>Data Quality &amp; QA Monitoring</span>
-<span class="track"><span class="fill" style="width:100%"></span></span>
-<span class="level">5/5</span>
 </div>
-<div class="skill">
-<span>Excel (Pivot Tables, Modelling)</span>
-<span class="track"><span class="fill" style="width:100%"></span></span>
-<span class="level">5/5</span>
-</div>
-<div class="skill">
-<span>Python for Data Analysis</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>SQL</span>
-<span class="track"><span class="fill" style="width:60%"></span></span>
-<span class="level">3/5</span>
-</div>
-<div class="skill">
-<span>Database Building &amp; Maintenance</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-</div>
-<div class="skill-group"><h3>Analytics &amp; Visualisation</h3>
-<div class="skill">
-<span>Power BI</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Tableau</span>
-<span class="track"><span class="fill" style="width:60%"></span></span>
-<span class="level">3/5</span>
-</div>
-<div class="skill">
-<span>Dashboard Design &amp; Data Visualisation</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>User Behaviour &amp; Conversion Analysis</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Statistics &amp; Cross-Tabulation</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Machine Learning &amp; SEM</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-</div>
-<div class="skill-group"><h3>AI Applications</h3>
-<div class="skill">
-<span>AI / LLM Agent Workflows</span>
-<span class="track"><span class="fill" style="width:100%"></span></span>
-<span class="level">5/5</span>
-</div>
-<div class="skill">
-<span>Product Definition &amp; 0-to-1 Delivery</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>RAG &amp; LLM Application Engineering</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-</div>
-<div class="skill-group"><h3>Business &amp; Commercial</h3>
-<div class="skill">
-<span>Competitor Benchmarking</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>E-Commerce &amp; Promotions Analytics</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Survey Design &amp; Scale Analysis</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Industry &amp; Equity Research</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Business Writing &amp; Stakeholder Reporting</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-</div>
-<div class="skill-group"><h3>Research Methods</h3>
-<div class="skill">
-<span>Panel Econometrics &amp; Causal Inference</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-<div class="skill">
-<span>Qualitative &amp; Case Research</span>
-<span class="track"><span class="fill" style="width:80%"></span></span>
-<span class="level">4/5</span>
-</div>
-</div>
-<p class="languages">Languages: Mandarin - native | English - IELTS 7.0, CET-6</p>
+</div></article>
 </section>
 <section id="education"><h2>Education</h2>
 <div class="edu"><div class="edu-head">
@@ -906,6 +588,7 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <li>GPA 3.74 / 4.0</li>
 <li>Key courses: Python for Data Analysis, Business Statistics, Managerial Statistics, Market Research &amp; Data Analysis, Strategic Management, Operations &amp; Supply Chain Management</li>
 </ul></div>
+<p class="languages">Languages: Mandarin - native | English - IELTS 7.0, CET-6</p>
 </section>
 <section id="awards"><h2>Honours &amp; Awards</h2><ul class="awards">
 <li>1st Prize, Shandong Province - 15th &quot;Zhengda Cup&quot; National Market Research &amp; Analysis Competition (2025)</li>
@@ -915,6 +598,6 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
 <li>&quot;Merit Student&quot;, BJTU (2023)</li>
 </ul></section>
 </main>
-<footer class="wrap">Generated from resume_data.py on 24 Sep 2026 &middot; no JavaScript, no tracking &middot; press Ctrl/Cmd + P for a print-ready PDF</footer>
+<footer class="wrap">Generated from resume_data.py on 26 Sep 2026 &middot; no JavaScript, no tracking &middot; press Ctrl/Cmd + P for a print-ready PDF</footer>
 </body>
 </html>

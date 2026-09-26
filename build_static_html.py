@@ -93,13 +93,11 @@ def build_css():
 :root {
   --bg: #ffffff;
   --card: #ffffff;
-  --surface: #f7f9fc;
   --line: #e4e9f2;
   --ink: #101826;
   --navy: #0f2350;
-  --muted: #5d6b82;
+  --muted: #55627a;
   --accent: #2b4ecc;
-  --accent-soft: #eef2ff;
   --pill: #e9eef9;
   --shadow: 0 1px 2px rgba(16, 24, 38, .04), 0 10px 30px rgba(16, 24, 38, .06);
 }
@@ -108,13 +106,11 @@ def build_css():
   :root {
     --bg: #0b111c;
     --card: #141d2e;
-    --surface: #131b2a;
     --line: #26314a;
     --ink: #e9eef7;
     --navy: #dbe5f8;
-    --muted: #97a4ba;
+    --muted: #9aa7bd;
     --accent: #7ea2ff;
-    --accent-soft: #1a2440;
     --pill: #1e293f;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
   }
@@ -122,10 +118,9 @@ def build_css():
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
-
-/* A plain white page looked empty, so the background carries a soft wash of
-   colour and the cards sit on top of it in flat white. */
+/* The page is a document, not an application: nothing here moves, folds or
+   responds to a click. The only interactive elements are the two contact
+   links, because a reader needs a way to reply. */
 body {
   margin: 0;
   min-height: 100vh;
@@ -157,10 +152,9 @@ body {
 .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
 
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
 
 /* ---------- header ---------- */
-.hero { display: flex; gap: 28px; align-items: center; padding: 56px 0 36px; }
+.hero { display: flex; gap: 28px; align-items: center; padding: 56px 0 30px; }
 
 .avatar {
   width: 124px; height: 124px; border-radius: 50%; object-fit: cover;
@@ -175,41 +169,20 @@ a:hover { text-decoration: underline; }
 .contact { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; font-size: .9rem; }
 
 .contact li {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 13px;
-  color: var(--muted);
-  overflow-wrap: anywhere;
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+  padding: 4px 13px; color: var(--muted); overflow-wrap: anywhere;
 }
-
-/* ---------- nav ---------- */
-.nav {
-  position: sticky; top: 0; z-index: 20;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 10px 0; font-size: .88rem; }
-.nav a { display: block; padding: 5px 12px; border-radius: 7px; color: var(--muted); }
-.nav a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
 
 /* ---------- sections ---------- */
-section { padding: 42px 0 8px; scroll-margin-top: 62px; }
+section { padding: 34px 0 6px; }
 
 h2 {
   font-size: .78rem; text-transform: uppercase; letter-spacing: .13em;
-  color: var(--muted); margin: 0 0 20px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-  transition: color .3s ease, border-color .3s ease;
-  break-after: avoid;
+  color: var(--muted); margin: 0 0 18px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--line); break-after: avoid;
 }
 
-section:target h2 { color: var(--accent); border-color: var(--accent); }
-
-.section-note { margin: -8px 0 20px; color: var(--muted); font-size: .92rem; }
+.section-note { margin: -6px 0 18px; color: var(--muted); font-size: .92rem; }
 .summary { margin: 0; font-size: 1.04rem; color: var(--ink); max-width: 68ch; }
 
 /* ---------- metrics ---------- */
@@ -222,17 +195,15 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 
 /* ---------- the role / project card ---------- */
 .card {
+  display: block;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow);
-  margin-bottom: 18px;
-  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 24px 26px;
+  break-inside: avoid;
 }
-
-.card > summary { list-style: none; cursor: pointer; padding: 26px 28px; }
-.card > summary::-webkit-details-marker { display: none; }
-.card > summary:hover { background: color-mix(in srgb, var(--accent-soft) 55%, transparent); }
 
 .card-top { display: flex; gap: 18px; align-items: flex-start; }
 
@@ -248,7 +219,7 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .card-icon svg { width: 24px; height: 24px; stroke: var(--card); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
 .card-titles { flex: 1; min-width: 0; }
-.card-role { margin: 0; font-size: 1.42rem; font-weight: 800; letter-spacing: -.02em; color: var(--navy); line-height: 1.2; }
+.card-role { margin: 0; font-size: 1.4rem; font-weight: 800; letter-spacing: -.02em; color: var(--navy); line-height: 1.2; }
 .card-org { margin: 3px 0 0; font-size: 1.04rem; font-weight: 700; color: var(--navy); }
 
 .card-period {
@@ -257,12 +228,9 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
   font-size: .8rem; font-weight: 700; white-space: nowrap; flex-shrink: 0;
 }
 
-.card-summary { margin: 18px 0 0; color: var(--muted); font-size: .98rem; }
+.card-summary { margin: 16px 0 0; color: var(--muted); font-size: .98rem; }
 
-/* the expandable half */
-.card-body { padding: 0 28px 26px; }
-
-.card-cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
+.card-cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 34px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line); }
 
 .col-title { display: flex; align-items: center; gap: 9px; font-size: 1.02rem; font-weight: 700; color: var(--ink); margin: 0 0 14px; }
 .col-title svg { width: 19px; height: 19px; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
@@ -273,24 +241,17 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .card-cols li { margin-bottom: 11px; font-size: .95rem; color: var(--muted); }
 .card-impact { margin: 0; font-size: .97rem; color: var(--muted); }
 
-.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
-.tag { font-size: .76rem; background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 3px 9px; }
-
-.card-hint { display: block; margin-top: 16px; font-size: .82rem; color: var(--accent); font-weight: 600; }
-.card[open] .card-hint { display: none; }
-
 /* ---------- publications ---------- */
 .pub {
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow);
+  padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow); break-inside: avoid;
 }
 
 .pub-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; margin-bottom: 8px; }
 
 .badge {
   font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
-  border-radius: 999px; padding: 3px 11px;
-  background: var(--pill); color: var(--navy);
+  border-radius: 999px; padding: 3px 11px; background: var(--pill); color: var(--navy);
 }
 
 .badge.live { background: #dff3e6; color: #17603a; }
@@ -302,57 +263,6 @@ section:target h2 { color: var(--accent); border-color: var(--accent); }
 .pub-detail { margin: 0; font-size: .91rem; color: var(--muted); }
 .pub-link { display: inline-block; margin-top: 8px; font-size: .85rem; }
 
-/* ---------- skills ---------- */
-.skill-group { margin-bottom: 26px; }
-.skill-group h3 { font-size: .9rem; margin: 0 0 12px; color: var(--ink); }
-.skill { display: grid; grid-template-columns: 1fr 160px 34px; align-items: center; gap: 14px; padding: 7px 0; font-size: .93rem; }
-.track { height: 7px; background: var(--line); border-radius: 99px; overflow: hidden; }
-
-.fill {
-  display: block;
-  height: 100%;
-  background: var(--accent);
-  border-radius: 99px;
-  animation: grow .9s ease-out both;
-}
-
-@keyframes grow { from { width: 0; } }
-
-/* ---------- entrance motion (CSS only - there is no JavaScript here) ------- */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes pop {
-  from { opacity: 0; transform: scale(.88); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes sweep {
-  from { opacity: 0; transform: scaleX(0); }
-  to   { opacity: 1; transform: none; }
-}
-
-.avatar { animation: pop .7s cubic-bezier(.2,.8,.3,1) both; }
-.hero h1 { animation: rise .6s cubic-bezier(.2,.7,.3,1) .08s both; }
-.headline { animation: rise .6s cubic-bezier(.2,.7,.3,1) .16s both; }
-.tagline { animation: rise .6s cubic-bezier(.2,.7,.3,1) .22s both; }
-.contact li { animation: rise .5s cubic-bezier(.2,.7,.3,1) both; }
-.nav { animation: rise .5s ease-out .45s both; }
-.summary { animation: rise .6s ease-out .5s both; }
-.metric { animation: rise .55s cubic-bezier(.2,.7,.3,1) both; }
-.card { animation: rise .55s cubic-bezier(.2,.7,.3,1) both; }
-h2 { transform-origin: left; animation: sweep .5s ease-out both; }
-
-/* Anyone who has asked their system to reduce motion gets none of it. */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-}
-
-.level { color: var(--muted); font-size: .8rem; text-align: right; }
-.languages { color: var(--muted); font-size: .88rem; margin: 4px 0 0; }
-
 /* ---------- education / awards ---------- */
 .edu { margin-bottom: 20px; }
 .edu-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
@@ -362,11 +272,13 @@ h2 { transform-origin: left; animation: sweep .5s ease-out both; }
 .edu ul, .awards { margin: 8px 0 0; padding-left: 20px; }
 .edu li, .awards li { font-size: .93rem; margin-bottom: 6px; color: var(--muted); }
 
-footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+.languages { color: var(--muted); font-size: .93rem; margin: 14px 0 0; }
+
+footer { margin-top: 44px; padding: 22px 0 46px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
 
 /* ---------- small screens ---------- */
 @media (max-width: 860px) {
-  .card-cols { grid-template-columns: 1fr; gap: 24px; }
+  .card-cols { grid-template-columns: 1fr; gap: 22px; }
 }
 
 @media (max-width: 720px) {
@@ -375,62 +287,44 @@ footer { margin-top: 52px; padding: 22px 0 46px; border-top: 1px solid var(--lin
   .avatar { width: 104px; height: 104px; }
   .hero h1 { font-size: 1.75rem; }
   .edu-period { margin-left: 0; width: 100%; }
-  .skill { grid-template-columns: 1fr 88px 32px; gap: 10px; }
-  .card > summary { padding: 20px; }
-  .card-body { padding: 0 20px 20px; }
+  .card { padding: 20px; }
   .card-top { flex-wrap: wrap; }
   .card-period { margin-left: 70px; }
-  .card-role { font-size: 1.24rem; }
+  .card-role { font-size: 1.22rem; }
 }
 
-/* ---------- print: one keystroke turns this page into a PDF ---------- */
+/* ---------- print ---------- */
 @media print {
   :root {
-    --bg: #ffffff; --card: #ffffff; --surface: #ffffff; --line: #cfd6e2;
-    --ink: #000000; --navy: #14307a; --muted: #444444; --accent: #14307a;
-    --accent-soft: #ffffff; --pill: #eef1f7; --shadow: none;
+    --bg: #ffffff; --card: #ffffff; --line: #cfd6e2;
+    --ink: #000000; --navy: #14307a; --muted: #3f4a5c; --accent: #14307a;
+    --pill: #eef1f7; --shadow: none;
   }
 
   @page { margin: 13mm; }
 
   body { font-size: 9.2pt; line-height: 1.32; background: #fff !important; background-image: none !important; }
-  .nav { display: none; }
   .wrap { max-width: none; padding: 0; }
-  .hero { padding: 0 0 14px; gap: 18px; }
-  .avatar { width: 88px; height: 88px; box-shadow: none; border: 1px solid var(--line); }
+  .hero { padding: 0 0 12px; gap: 18px; }
+  .avatar { width: 84px; height: 84px; box-shadow: none; border: 1px solid var(--line); }
   section { padding: 10px 0 0; }
   h2 { margin-bottom: 8px; padding-bottom: 4px; }
   .section-note { margin: -4px 0 10px; }
   .summary { max-width: none; }
-  .metric { padding: 10px 13px; box-shadow: none; break-inside: avoid; }
+  .metrics { gap: 9px; }
+  .metric { padding: 10px 13px; box-shadow: none; }
   .metric b { font-size: 1.4rem; }
-  .card, .pub { box-shadow: none; break-inside: avoid; margin-bottom: 9px; }
-  .card > summary { padding: 11px 13px 8px; }
-  .card-body { padding: 0 13px 11px; }
-  .card-cols { padding-top: 9px; gap: 18px; }
-  .card-cols li { margin-bottom: 3px; }
+  .card, .pub { box-shadow: none; margin-bottom: 9px; }
+  .card { padding: 12px 14px; }
   .card-summary { margin-top: 10px; }
+  .card-cols { margin-top: 10px; padding-top: 9px; gap: 18px; }
+  .card-cols li { margin-bottom: 3px; }
   .card-role { font-size: 1.05rem; }
   .col-title { margin-bottom: 8px; font-size: .95rem; }
-  .tags { margin-top: 10px; }
   .card-icon { width: 32px; height: 32px; background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .pub { padding: 12px 14px; }
   .pub-head { margin-bottom: 5px; }
-  .metrics { gap: 9px; }
   .edu { margin-bottom: 12px; }
-  .card-hint { display: none; }
-  .skill { padding: 3px 0; }
-
-  /* two columns of skills instead of one long list */
-  .skill-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; margin-bottom: 14px; }
-  .skill-group h3 { grid-column: 1 / -1; }
-
-  /* every collapsed card is forced open so nothing is lost on paper */
-  .card[open] .card-body, .card .card-body { display: block !important; }
-  details::details-content { content-visibility: visible !important; block-size: auto !important; }
-
-  .fill, .avatar, .hero h1, .headline, .tagline, .contact li,
-  .summary, .metric, .card, h2 { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 """
 
@@ -455,44 +349,18 @@ def build_hero():
         '<a href="mailto:' + esc(profile["email"]) + '">' + esc(profile["email"]) + '</a>',
         '<a href="' + esc(profile["linkedin_url"]) + '">' + esc(profile["linkedin_label"]) + '</a>',
     ]
-    chip_index = 0
     for chip in chips:
-        delay = 0.28 + chip_index * 0.07
-        parts.append('<li style="animation-delay:' + str(round(delay, 2)) + 's">' + chip + '</li>')
-        chip_index = chip_index + 1
+        parts.append('<li>' + chip + '</li>')
     parts.append('</ul>')
     parts.append('</div>')
     parts.append('</header>')
     return "\n".join(parts)
 
 
-def build_nav():
-    links = [
-        ("about", "About"),
-        ("impact", "Impact"),
-        ("experience", "Experience"),
-        ("projects", "Projects"),
-        ("publications", "Publications"),
-        ("campus", "Campus"),
-        ("skills", "Skills"),
-        ("education", "Education"),
-        ("awards", "Awards"),
-    ]
-    parts = ['<nav class="nav"><div class="wrap"><ul>']
-    for anchor, label in links:
-        parts.append('<li><a href="#' + anchor + '">' + label + '</a></li>')
-    parts.append('</ul></div></nav>')
-    return "\n".join(parts)
-
-
 def build_highlights():
     parts = ['<section id="impact"><h2>Impact in Numbers</h2><div class="metrics">']
-    card_index = 0
     for item in resume_data.HIGHLIGHTS:
-        # the generator writes the stagger, so the cards arrive one after another
-        delay = 0.06 * card_index
-        parts.append('<div class="metric" style="animation-delay:' + str(round(delay, 2)) + 's">')
-        card_index = card_index + 1
+        parts.append('<div class="metric">')
         parts.append('<b>' + esc(item["value"]) + '</b>')
         parts.append('<span>' + esc(item["label"]) + '</span>')
         parts.append('<small>' + esc(item["note"]) + '</small>')
@@ -501,16 +369,14 @@ def build_highlights():
     return "\n".join(parts)
 
 
-def build_card(entry, lookup, title_field, subtitle_field, is_open, delay):
-    """Render one role or project as an expandable card.
+def build_card(entry, title_field, subtitle_field):
+    """Render one role or project as a plain, fully visible card.
 
-    title_field / subtitle_field decide which line is the big one: for a job
-    that is the role, for a project it is the project name.
+    There is nothing to click: the whole entry is on the page from the moment
+    it loads, which is what a resume should do.
     """
     parts = []
-    open_attr = " open" if is_open else ""
-    parts.append('<details class="card" style="animation-delay:' + str(round(delay, 2)) + 's"' + open_attr + '>')
-    parts.append('<summary>')
+    parts.append('<article class="card">')
     parts.append('<div class="card-top">')
     parts.append('<span class="card-icon">' + icon_svg(entry.get("icon", ""), "") + '</span>')
     parts.append('<div class="card-titles">')
@@ -520,11 +386,8 @@ def build_card(entry, lookup, title_field, subtitle_field, is_open, delay):
     parts.append('<span class="card-period">' + esc(entry["period"]) + '</span>')
     parts.append('</div>')
     parts.append('<p class="card-summary">' + esc(entry["summary"]) + '</p>')
-    parts.append('<span class="card-hint">Open for the detail &darr;</span>')
-    parts.append('</summary>')
 
-    parts.append('<div class="card-body"><div class="card-cols">')
-
+    parts.append('<div class="card-cols">')
     parts.append('<div>')
     parts.append('<p class="col-title resp">' + icon_svg("people", "") + 'Key Responsibilities</p>')
     parts.append('<ul>')
@@ -535,27 +398,18 @@ def build_card(entry, lookup, title_field, subtitle_field, is_open, delay):
     parts.append('<div>')
     parts.append('<p class="col-title impact">' + icon_svg("bullseye", "") + 'Impact &amp; Achievements</p>')
     parts.append('<p class="card-impact">' + esc(entry["impact"]) + '</p>')
-    parts.append('<div class="tags">')
-    for key in entry["skills"]:
-        if key in lookup:
-            parts.append('<span class="tag">' + esc(lookup[key]["name"]) + '</span>')
-    parts.append('</div></div>')
+    parts.append('</div>')
 
-    parts.append('</div></div></details>')
+    parts.append('</div></article>')
     return "\n".join(parts)
 
 
 def build_card_section(anchor, heading, note, entries, title_field, subtitle_field):
-    lookup = skill_lookup()
     parts = ['<section id="' + anchor + '"><h2>' + esc(heading) + '</h2>']
     if note != "":
         parts.append('<p class="section-note">' + esc(note) + '</p>')
-    position = 0
     for entry in entries:
-        # the first card starts expanded, the rest stay tidy
-        parts.append(build_card(entry, lookup, title_field, subtitle_field,
-                                position == 0, 0.05 * position))
-        position = position + 1
+        parts.append(build_card(entry, title_field, subtitle_field))
     parts.append('</section>')
     return "\n".join(parts)
 
@@ -563,7 +417,7 @@ def build_card_section(anchor, heading, note, entries, title_field, subtitle_fie
 def build_experience():
     return build_card_section(
         "experience", "Experience",
-        "Four analytics internships. Each card opens for the full detail.",
+        "Four analytics internships.",
         resume_data.EXPERIENCE, "role", "org")
 
 
@@ -600,25 +454,6 @@ def build_publications():
     return "\n".join(parts)
 
 
-def build_skills():
-    parts = ['<section id="skills"><h2>Skills</h2>']
-    for group in resume_data.SKILL_GROUPS:
-        parts.append('<div class="skill-group"><h3>' + esc(group) + '</h3>')
-        for skill in resume_data.SKILLS:
-            if skill["group"] != group:
-                continue
-            width = skill["level"] * 20
-            parts.append('<div class="skill">')
-            parts.append('<span>' + esc(skill["name"]) + '</span>')
-            parts.append('<span class="track"><span class="fill" style="width:' + str(width) + '%"></span></span>')
-            parts.append('<span class="level">' + str(skill["level"]) + '/5</span>')
-            parts.append('</div>')
-        parts.append('</div>')
-    parts.append('<p class="languages">Languages: ' + esc(" | ".join(resume_data.LANGUAGES)) + '</p>')
-    parts.append('</section>')
-    return "\n".join(parts)
-
-
 def build_education():
     parts = ['<section id="education"><h2>Education</h2>']
     for entry in resume_data.EDUCATION:
@@ -630,6 +465,7 @@ def build_education():
         for note in entry["notes"]:
             parts.append('<li>' + esc(note) + '</li>')
         parts.append('</ul></div>')
+    parts.append('<p class="languages">Languages: ' + esc(" | ".join(resume_data.LANGUAGES)) + '</p>')
     parts.append('</section>')
     return "\n".join(parts)
 
@@ -658,7 +494,6 @@ def build_page():
     parts.append('<div class="wrap">')
     parts.append(build_hero())
     parts.append('</div>')
-    parts.append(build_nav())
     parts.append('<main class="wrap">')
     parts.append('<section id="about"><h2>About</h2><p class="summary">' +
                  esc(resume_data.PROFILE["summary"]) + '</p></section>')
@@ -667,7 +502,6 @@ def build_page():
     parts.append(build_projects())
     parts.append(build_publications())
     parts.append(build_campus())
-    parts.append(build_skills())
     parts.append(build_education())
     parts.append(build_awards())
     parts.append('</main>')
